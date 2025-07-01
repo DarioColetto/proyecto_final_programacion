@@ -1,0 +1,21 @@
+# Node.js (para backend y frontend)
+**/node_modules/
+
+# Entornos (ambos)
+**/.env
+**/.env.*
+
+# SQLite
+backend/database/*.sqlite
+
+# Logs
+*.log
+logs/
+
+# SO
+.DS_Store
+Thumbs.db
+
+# Vite / CRA
+frontend/dist/
+frontend/build/
