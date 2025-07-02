@@ -3,7 +3,7 @@
 
 # Entornos (ambos)
 **/.env
-**/.env.*
+
 
 # SQLite
 backend/database/*.sqlite
