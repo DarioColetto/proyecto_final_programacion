@@ -3,6 +3,7 @@ import { fetchProducts } from '../services/productService';
 import ProductItem from './ProductItem';
 import Filters from './Filters';
 import mockProducts from '../mocks/products';
+import '../App.css'
 
 export default function ProductList() {
   const [products, setProducts] = useState([]);
@@ -38,14 +39,34 @@ export default function ProductList() {
       return 0;
     });
 
-  return (
+return (
     <div>
-      <Filters filters={filters} setFilters={setFilters} />
-      <ul>
-        {filtered.map(product => (
-          <ProductItem key={product.id} product={product} />
-        ))}
-      </ul>
+        <Filters filters={filters} setFilters={setFilters} />
+        <table>
+            <thead>
+            <tr>
+                    <th>Nombre</th>
+                    <th>Precio</th>
+                    <th>Categoría</th>
+                    <th>Stock</th>
+            </tr>
+            </thead>
+            <tbody>
+            {filtered.map(product => {
+                let stockColor = 'green';
+                if (product.stock === 0) stockColor = 'red';
+                else if (product.stock >= 1 && product.stock <= 5) stockColor = 'orange';
+                return (
+                    <tr key={product.id}>
+                        <td>{product.name}</td>
+                        <td>${product.price.toLocaleString()}</td>
+                        <td>{product.category}</td>
+                        <td style={{ color: stockColor }}>{product.stock}</td>
+                    </tr>
+                );
+            })}
+            </tbody>
+        </table>
     </div>
-  );
+);
 }

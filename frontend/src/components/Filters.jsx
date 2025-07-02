@@ -1,6 +1,6 @@
 export default function Filters({ filters, setFilters }) {
   return (
-    <div>
+    <div >
       <input
         type="text"
         placeholder="Buscar por nombre"
