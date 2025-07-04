@@ -5,13 +5,19 @@
   text-align: center;
 }
 
-
+.product-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
 table{
     width: 100%;
-    background: rgb(48, 48, 48);
+    /* background: rgb(48, 48, 48); */
     border-radius: 5px;
     margin: 3%;
+    border-collapse: collapse;
+    border-spacing: 1px;
 
     & th{
         color: white;
@@ -27,14 +33,54 @@ table{
         background: rgb(64, 64, 64);
     }
 
-    & tr:hover{
+    & tr:hover td{
         background: rgb(80, 80, 80);
     }
 
-    .filters {
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 1rem;
-    }
+}
 
+
+.filters {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+}
+
+.create-product{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 2rem;
+}
+
+.create-product form .inputs {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 2rem;
+    border-radius: 8px;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-template-rows: repeat(5, auto);
+    gap: 1rem 2rem;
+    align-items: center;
+}
+
+.create-product label {
+    justify-self: end;
+    font-weight: bold;
+}
+
+.create-product input {
+    width: 100%;
+    padding: 0.5rem;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+form .buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1rem;
 }

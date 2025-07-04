@@ -1,10 +1,15 @@
 import { useEffect, useState } from 'react';
 import { fetchProducts } from '../services/productService';
-import ProductItem from './ProductItem';
 import Filters from './Filters';
 import mockProducts from '../mocks/products';
 import '../App.css'
+import { useNavigate } from 'react-router-dom';
 
+
+/**
+ * 
+ * @returns {JSX.Element} Lista de productos con filtros y opciones de edición/eliminación
+ */
 export default function ProductList() {
   const [products, setProducts] = useState([]);
   const [filters, setFilters] = useState({
@@ -14,6 +19,8 @@ export default function ProductList() {
     minPrice: '',
     maxPrice: ''
   });
+  const navigate = useNavigate();
+ 
 
   useEffect(() => {
     fetchProducts()
@@ -24,6 +31,10 @@ export default function ProductList() {
       });
   }, []);
 
+  /** 
+   * Filtrar y ordenar productos
+   * Aquí se aplica la lógica de filtrado y ordenamiento
+   */
   const filtered = products
     .filter(p =>
       p.name.toLowerCase().includes(filters.name.toLowerCase()) &&
@@ -39,8 +50,29 @@ export default function ProductList() {
       return 0;
     });
 
+/**
+ *  Editar un producto
+ * @param {*} productId 
+ */ 
+const edit = (productId) => {
+  navigate(`/editar-producto/${productId}`);
+};
+
+/**
+ * Eliminar un producto
+ * @param {*} productId 
+ */
+const del = (productId) => {
+  if (window.confirm("¿Estás seguro de que querés eliminar este producto?")) {
+    setProducts(prev => prev.filter(p => p.id !== productId));
+  }
+};
+
 return (
-    <div>
+    <div className='product-list'>
+      <div>
+        
+      </div>
         <Filters filters={filters} setFilters={setFilters} />
         <table>
             <thead>
@@ -49,6 +81,8 @@ return (
                     <th>Precio</th>
                     <th>Categoría</th>
                     <th>Stock</th>
+                    <th></th>
+                    <th><button className='nuevo-producto' type='button' onClick={() => navigate('/crear-producto')}>+</button></th>
             </tr>
             </thead>
             <tbody>
@@ -62,6 +96,8 @@ return (
                         <td>${product.price.toLocaleString()}</td>
                         <td>{product.category}</td>
                         <td style={{ color: stockColor }}>{product.stock}</td>
+                        <td><button className='edit' title="Editar producto" onClick={() => edit(product.id)}>✏️</button></td>
+                        <td><button className='del' title="Eliminar producto" onClick={() => del(product.id)}>🗑️</button></td>
                     </tr>
                 );
             })}

@@ -1,20 +1,25 @@
 export default function Filters({ filters, setFilters }) {
   return (
-    <div >
+    <div className="filters">
       <input
         type="text"
         placeholder="Buscar por nombre"
+         name="name-filter"
         value={filters.name}
-        onChange={e => setFilters({ ...filters, name: e.target.value })}
+        onChange={(e) => setFilters({ ...filters, name: e.target.value })}
       />
 
-      <select onChange={e => setFilters({ ...filters, category: e.target.value })}>
+      <select name="category"
+        onChange={(e) => setFilters({ ...filters, category: e.target.value })}
+      >
         <option value="">Todas las categorías</option>
         <option value="Electrónica">Electrónica</option>
         <option value="Ropa">Ropa</option>
       </select>
 
-      <select onChange={e => setFilters({ ...filters, sort: e.target.value })}>
+      <select name="sort-by"
+        onChange={(e) => setFilters({ ...filters, sort: e.target.value })}
+      >
         <option value="">Ordenar por</option>
         <option value="name">Nombre</option>
         <option value="price-desc">Precio (desc)</option>
@@ -22,16 +27,18 @@ export default function Filters({ filters, setFilters }) {
         <option value="stock">Stock disponible</option>
       </select>
 
-      <input
-        type="number"
-        placeholder="Precio mínimo"
-        onChange={e => setFilters({ ...filters, minPrice: e.target.value })}
-      />
-      <input
-        type="number"
-        placeholder="Precio máximo"
-        onChange={e => setFilters({ ...filters, maxPrice: e.target.value })}
-      />
+      <div>
+        <input
+          type="number"
+          placeholder="Precio mínimo"
+          onChange={(e) => setFilters({ ...filters, minPrice: e.target.value })}
+        />
+        <input
+          type="number"
+          placeholder="Precio máximo"
+          onChange={(e) => setFilters({ ...filters, maxPrice: e.target.value })}
+        />
+      </div>
     </div>
   );
 }
