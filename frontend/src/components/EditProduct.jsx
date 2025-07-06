@@ -1,6 +1,6 @@
 import { useParams, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import mockProducts from '../mocks/products';
+import { productService } from '../services/productServiceFactory';
 import ProductForm from './productForm';
 
 export default function EditProduct() {
@@ -9,15 +9,40 @@ export default function EditProduct() {
   const [product, setProduct] = useState(null);
 
   useEffect(() => {
-    const prod = mockProducts.find(p => p.id.toString() === id);
-    if (prod) setProduct(prod);
-    else setProduct(false); // Producto no encontrado
+    productService.getById(id)
+      .then((data) => {
+        if (data) {
+          setProduct(data);
+        } else {
+          setProduct(false); // Producto no encontrado
+        }
+      })
+      .catch((error) => {
+        console.error("Error al obtener el producto:", error);
+        setProduct(false); // Manejo de error
+      });
   }, [id]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Producto actualizado:", product);
-    navigate('/');
+    const updatedProduct = {
+      ...product,
+      name: product.name.trim(),
+      category: product.category.trim(),
+      price: Number(product.price),
+      stock: Number(product.stock),
+    };
+
+    productService.update(id, updatedProduct)
+      .then(() => {
+        console.log("Producto actualizado:", updatedProduct);
+        navigate('/');
+      })
+      .catch((error) => {
+        console.error("Error al actualizar el producto:", error);
+        alert("Error al actualizar el producto. Intente nuevamente.");
+      });
+ 
   };
 
   if (product === false) return <p>Producto no encontrado.</p>;

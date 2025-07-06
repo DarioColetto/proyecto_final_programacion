@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import ProductForm from "./productForm"; // Corregido
-import mockProducts from "../mocks/products";
+import ProductForm from "./productForm";
+import { productService } from '../services/productServiceFactory';
 
 export default function CreateProduct() {
   const navigate = useNavigate();
@@ -22,12 +22,19 @@ export default function CreateProduct() {
       category: product.category.trim(),
       price: Number(product.price),
       stock: Number(product.stock),
-      id: Date.now(), // Simulamos ID único
+ 
     };
 
-    console.log("Producto creado:", newProduct);
-    mockProducts.push(newProduct); // Simular persistencia temporal
-    navigate("/");
+    productService.create(newProduct)
+      .then(() => {
+        console.log("Producto creado:", newProduct);
+        navigate("/");
+      })
+      .catch((error) => {
+        console.error("Error al crear el producto:", error);
+        alert("Error al crear el producto. Intente nuevamente.");
+      });
+   
   };
 
   return (

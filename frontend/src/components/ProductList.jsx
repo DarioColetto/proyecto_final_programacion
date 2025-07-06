@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
-import { fetchProducts } from '../services/productService';
+import { productService } from '../services/productServiceFactory';
 import Filters from './Filters';
-import mockProducts from '../mocks/products';
 import '../App.css'
 import { useNavigate } from 'react-router-dom';
 
@@ -22,14 +21,9 @@ export default function ProductList() {
   const navigate = useNavigate();
  
 
-  useEffect(() => {
-    fetchProducts()
-      .then(setProducts)
-      .catch(() => {
-        console.warn("No se pudo conectar con el backend. Usando datos mock.");
-        setProducts(mockProducts); // Fallback to mock data
-      });
-  }, []);
+useEffect(() => {
+  productService.getAll().then(setProducts);
+}, []);
 
   /** 
    * Filtrar y ordenar productos

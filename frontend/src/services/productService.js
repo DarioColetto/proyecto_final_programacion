@@ -1,11 +1,21 @@
-const API_URL = import.meta.env.VITE_API_URL + '/products';
+export class ProductService {
+  async getAll() {
+    throw new Error("getAll() no implementado");
+  }
 
-/**
- * Fetches products from the API.
- * @returns {Promise<Array>} A promise that resolves to an array of products.
- */
-export const fetchProducts = async () => {
-  const res = await fetch(API_URL);
-  return await res.json();
-};
+  async getById(id) {
+    throw new Error("getById() no implementado");
+  }
 
+  async create(product) {
+    throw new Error("create() no implementado");
+  }
+
+  async update(id, product) {
+    throw new Error("update() no implementado");
+  }
+
+  async delete(id) {
+    throw new Error("delete() no implementado");
+  }
+}
