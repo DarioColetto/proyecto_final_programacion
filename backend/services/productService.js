@@ -18,25 +18,6 @@ class ProductService {
     return repository.findById(id);
   }
 
-  static getByName(name) {
-    return repository.findByName(name);
-  }
-
-  static getByBrand(brand) {
-    return repository.findByBrand(brand);
-  }
-
-  static getByCategory(category) {
-    return repository.findByCategory(category);
-  }
-
-  static getByPriceRange(minPrice, maxPrice) {
-    return repository.findByPriceRange(minPrice, maxPrice);
-  }
-
-  static getByStock(stock) {
-    return repository.findByStock(stock);
-  }
 
   static create(data) {
     return repository.create(data);

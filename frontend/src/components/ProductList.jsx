@@ -34,13 +34,16 @@ useEffect(() => {
       p.name.toLowerCase().includes(filters.name.toLowerCase()) &&
       (!filters.category || p.category === filters.category) &&
       (!filters.minPrice || p.price >= Number(filters.minPrice)) &&
-      (!filters.maxPrice || p.price <= Number(filters.maxPrice))
+      (!filters.maxPrice || p.price <= Number(filters.maxPrice)) &&
+      (!filters.brand || p.brand.toLowerCase().includes(filters.brand.toLowerCase()))
+     
     )
     .sort((a, b) => {
       if (filters.sort === 'name') return a.name.localeCompare(b.name);
       if (filters.sort === 'price-desc') return b.price - a.price;
       if (filters.sort === 'category') return a.category.localeCompare(b.category);
       if (filters.sort === 'stock') return b.stock - a.stock;
+      if (filters.sort === 'brand') return a.brand.localeCompare(b.brand);
       return 0;
     });
 
@@ -74,6 +77,7 @@ return (
                     <th>Nombre</th>
                     <th>Precio</th>
                     <th>Categoría</th>
+                    <th>Marca</th>
                     <th>Stock</th>
                     <th></th>
                     <th><button className='nuevo-producto' type='button' onClick={() => navigate('/crear-producto')}>+</button></th>
@@ -89,6 +93,7 @@ return (
                         <td>{product.name}</td>
                         <td>${product.price.toLocaleString()}</td>
                         <td>{product.category}</td>
+                        <td>{product.brand}</td>
                         <td style={{ color: stockColor }}>{product.stock}</td>
                         <td><button className='edit' title="Editar producto" onClick={() => edit(product.id)}>✏️</button></td>
                         <td><button className='del' title="Eliminar producto" onClick={() => del(product.id)}>🗑️</button></td>

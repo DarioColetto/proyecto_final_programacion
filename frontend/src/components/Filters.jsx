@@ -25,6 +25,7 @@ export default function Filters({ filters, setFilters }) {
         <option value="price-desc">Precio (desc)</option>
         <option value="category">Categoría</option>
         <option value="stock">Stock disponible</option>
+        <option value="brand">Marca</option>
       </select>
 
       <div>
