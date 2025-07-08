@@ -28,19 +28,29 @@ export default function EditProduct() {
     const updatedProduct = {
       ...product,
       name: product.name.trim(),
-      category: product.category.trim(),
+      cathegory: product.cathegory.trim(),
+      brand: product.brand.trim(),
       price: Number(product.price),
       stock: Number(product.stock),
     };
 
+    
+
     productService.update(id, updatedProduct)
-      .then(() => {
+      .then((res) => {
+   
+       
+      if (!res.ok){
+
+        throw new Error( res.mensaje +': ' + res.detalles );
+      }
         console.log("Producto actualizado:", updatedProduct);
-        navigate('/');
+         navigate('/'); // Redirigir a la lista de productos
+  
       })
       .catch((error) => {
-        console.error("Error al actualizar el producto:", error);
-        alert("Error al actualizar el producto. Intente nuevamente.");
+        console.error(error.message);
+        alert(error.message);
       });
  
   };

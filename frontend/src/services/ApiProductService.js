@@ -23,14 +23,20 @@ export class ApiProductService extends ProductService {
   }
 
   async update(id, product) {
-    await fetch(`${API_URL}/products/${id}`, {
+    const res = await fetch(`${API_URL}/products/${id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(product)
     });
+
+  
+    return res.json();
   }
 
   async delete(id) {
-    await fetch(`${API_URL}/products/${id}`, { method: 'DELETE' });
+    const res = await fetch(`${API_URL}/products/${id}`, { method: 'DELETE' });
+
+   return res.json()
   }
+
 }

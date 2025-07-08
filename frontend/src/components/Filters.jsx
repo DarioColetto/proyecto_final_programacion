@@ -23,7 +23,7 @@ export default function Filters({ filters, setFilters }) {
         <option value="">Ordenar por</option>
         <option value="name">Nombre</option>
         <option value="price-desc">Precio (desc)</option>
-        <option value="category">Categoría</option>
+        <option value="cathegory">Categoría</option>
         <option value="stock">Stock disponible</option>
         <option value="brand">Marca</option>
       </select>

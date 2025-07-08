@@ -12,6 +12,7 @@ function validate(schema) {
 
     if (error) {
       return res.status(400).json({
+        ok: false,
         mensaje: 'Error de validación',
         detalles: error.details.map(d => d.message)
       });

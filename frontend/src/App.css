@@ -54,7 +54,7 @@ table{
     margin-top: 2rem;
 }
 
-.create-product form .inputs {
+form .inputs {
     max-width: 600px;
     margin: 0 auto;
     padding: 2rem;
@@ -66,12 +66,12 @@ table{
     align-items: center;
 }
 
-.create-product label {
+form label {
     justify-self: end;
     font-weight: bold;
 }
 
-.create-product input {
+form input {
     width: 100%;
     padding: 0.5rem;
     border-radius: 4px;

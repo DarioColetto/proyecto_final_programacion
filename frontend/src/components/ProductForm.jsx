@@ -25,7 +25,10 @@ export default function ProductForm({ product, setProduct, handleSubmit }) {
         <input name="price" type="number" value={product.price} onChange={handleChange} required />
 
         <label>Categoría:</label>
-        <input name="category" value={product.category} onChange={handleChange} required />
+        <input name="cathegory" value={product.cathegory} onChange={handleChange} required />
+        
+        <label>Marca:</label>
+        <input name="brand" value={product.brand} onChange={handleChange} required />
 
         <label>Stock:</label>
         <input name="stock" type="number" value={product.stock} onChange={handleChange} required />

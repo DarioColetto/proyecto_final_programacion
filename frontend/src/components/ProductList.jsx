@@ -32,7 +32,7 @@ useEffect(() => {
   const filtered = products
     .filter(p =>
       p.name.toLowerCase().includes(filters.name.toLowerCase()) &&
-      (!filters.category || p.category === filters.category) &&
+      (!filters.category || p.cathegory === filters.cathegory) &&
       (!filters.minPrice || p.price >= Number(filters.minPrice)) &&
       (!filters.maxPrice || p.price <= Number(filters.maxPrice)) &&
       (!filters.brand || p.brand.toLowerCase().includes(filters.brand.toLowerCase()))
@@ -41,7 +41,7 @@ useEffect(() => {
     .sort((a, b) => {
       if (filters.sort === 'name') return a.name.localeCompare(b.name);
       if (filters.sort === 'price-desc') return b.price - a.price;
-      if (filters.sort === 'category') return a.category.localeCompare(b.category);
+      if (filters.sort === 'cathegory') return a.cathegory.localeCompare(b.category);
       if (filters.sort === 'stock') return b.stock - a.stock;
       if (filters.sort === 'brand') return a.brand.localeCompare(b.brand);
       return 0;
@@ -61,6 +61,7 @@ const edit = (productId) => {
  */
 const del = (productId) => {
   if (window.confirm("¿Estás seguro de que querés eliminar este producto?")) {
+    productService.delete(productId)
     setProducts(prev => prev.filter(p => p.id !== productId));
   }
 };
@@ -92,7 +93,7 @@ return (
                     <tr key={product.id}>
                         <td>{product.name}</td>
                         <td>${product.price.toLocaleString()}</td>
-                        <td>{product.category}</td>
+                        <td>{product.cathegory}</td>
                         <td>{product.brand}</td>
                         <td style={{ color: stockColor }}>{product.stock}</td>
                         <td><button className='edit' title="Editar producto" onClick={() => edit(product.id)}>✏️</button></td>

@@ -9,7 +9,8 @@ export default function CreateProduct() {
   const [product, setProduct] = useState({
     name: "",
     price: "",
-    category: "",
+    cathegory: "",
+    brand: "",
     stock: "",
   });
 
@@ -19,10 +20,10 @@ export default function CreateProduct() {
     const newProduct = {
       ...product,
       name: product.name.trim(),
-      category: product.category.trim(),
+      cathegory: product.cathegory.trim(),
+      brand: product.brand.trim(),
       price: Number(product.price),
       stock: Number(product.stock),
- 
     };
 
     productService.create(newProduct)

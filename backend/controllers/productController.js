@@ -9,15 +9,20 @@ class ProductController {
    * @requires services/productService
    */
 
-  async getAll(req, res) {
-    try {
-      const products = await service.getAll();
-      res.json(products);
-    } catch (error) {
+  getAll(req, res) {
+
+    service.getAll()
+    .then(products => {
+      res.json(products) 
+      })
+    .catch(error => {
       console.error("Error en getAll:", error);
       res.status(500).json({ error: "Error fetching products" });
-    }
+    });
   }
+
+
+  
 
   async getById(req, res) {
     try {
@@ -45,8 +50,7 @@ class ProductController {
     try {
       const id = req.params.id;
       const updated = await service.update(id, req.body);
-      if (!updated) return res.status(404).json({ error: "Product not found" });
-      res.json(updated);
+      res.status(200).json({"modifided":updated, "ok": true});
     } catch (error) {
       console.error("Error en update:", error);
       res.status(500).json({ error: "Error updating product" });
@@ -58,7 +62,7 @@ class ProductController {
       const id = req.params.id;
       const deleted = await service.delete(id);
       if (!deleted) return res.status(404).json({ error: "Product not found" });
-      res.status(204).send();
+      res.status(204).json({message:"Producto elminado"}); 
     } catch (error) {
       console.error("Error en delete:", error);
       res.status(500).json({ error: "Error deleting product" });
