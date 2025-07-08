@@ -45,7 +45,7 @@ product-management/
 │   ├── public/
 │   ├── src/
 │   │   ├── components/
-│   │   ├── pages/
+│   │   ├── mocks/
 │   │   ├── services/
 │   │   └── App.js
 │   ├── .env
@@ -83,7 +83,7 @@ cp .env.example .env
 npm run dev
 ```
 
-El frontend corre por defecto en: http://localhost:3000
+El frontend corre por defecto en: http://localhost:5173/
 
 ## 🐳 Ejecutar con Docker
 
@@ -93,7 +93,7 @@ Desde la raíz del proyecto:
 docker-compose up --build
 ```
 
-- Frontend: http://localhost:3000
+- Frontend: http://localhost:5173/
 
 - Backend: http://localhost:3001/api/products
 
@@ -110,23 +110,31 @@ docker-compose up --build
 
 
 ## 📦 Variables de Entorno
+Crear los .env utilizando las plantillas .env.example
+
+Ejemplos:
+
 Backend (backend/.env)
 ```
 env
 
-PORT= ''
-DATABASE_STORAGE= ''
+PORT= '3001'
+DATABASE_STORAGE= './database/products.sqlite'
 ```
 
 Frontend (frontend/.env)
 ```
 env
 
-
-VITE_API_URL= ''
+VITE_API_URL= 'http://localhost:3001/api'
+VITE_USE_MOCK=true
 ```
 
 **Nota**: Usar .env.example como plantilla.
+```
+VITE_USE_MOC => true | false 
+```
+si  se quiere usar el mock o hacer fetch a la api.
 
 
 ## Autor
