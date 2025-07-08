@@ -13,7 +13,7 @@ const productCreateSchema = Joi.object({
   name: Joi.string().required(),
   price: Joi.number().required(),
   brand: Joi.string().required(),
-  category: Joi.string().required(),
+  cathegory: Joi.string().required(),
   stock: Joi.number().integer().min(0).default(0),
 });
 
@@ -22,7 +22,7 @@ const productUpdateSchema = Joi.object({
     name: Joi.string().optional(),
     price: Joi.number().optional(),
     brand: Joi.string().optional(),
-    category: Joi.string().optional(),
+    cathegory: Joi.string().optional(),
     stock: Joi.number().integer().min(0).default(0).optional(),
     });
 

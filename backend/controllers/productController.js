@@ -1,23 +1,69 @@
 const service = require('../services/productService');
 
-exports.getAll = async (req, res) => {
-  res.json(await service.getAll());
-};
+class ProductController {
+  /**
+   * Controller for managing products.
+   * Provides methods to handle HTTP requests for product operations.
+   * @class ProductController
+   * @module controllers
+   * @requires services/productService
+   */
 
-exports.getById = async (req, res) => {
-  res.json(await service.getById(req.params.id));
-};
+  async getAll(req, res) {
+    try {
+      const products = await service.getAll();
+      res.json(products);
+    } catch (error) {
+      console.error("Error en getAll:", error);
+      res.status(500).json({ error: "Error fetching products" });
+    }
+  }
 
-exports.create = async (req, res) => {
-  res.status(201).json(await service.create(req.body));
-};
+  async getById(req, res) {
+    try {
+      const id = req.params.id;
+      const product = await service.getById(id);
+      if (!product) return res.status(404).json({ error: "Product not found" });
+      res.json(product);
+    } catch (error) {
+      console.error("Error en getById:", error);
+      res.status(500).json({ error: "Error fetching product" });
+    }
+  }
 
-exports.update = async (req, res) => {
-  await service.update(req.params.id, req.body);
-  res.sendStatus(204);
-};
+  async create(req, res) {
+    try {
+      const newProduct = await service.create(req.body);
+      res.status(201).json(newProduct);
+    } catch (error) {
+      console.error("Error en create:", error);
+      res.status(500).json({ error: "Error creating product" });
+    }
+  }
 
-exports.delete = async (req, res) => {
-  await service.delete(req.params.id);
-  res.sendStatus(204);
-};
+  async update(req, res) {
+    try {
+      const id = req.params.id;
+      const updated = await service.update(id, req.body);
+      if (!updated) return res.status(404).json({ error: "Product not found" });
+      res.json(updated);
+    } catch (error) {
+      console.error("Error en update:", error);
+      res.status(500).json({ error: "Error updating product" });
+    }
+  }
+
+  async delete(req, res) {
+    try {
+      const id = req.params.id;
+      const deleted = await service.delete(id);
+      if (!deleted) return res.status(404).json({ error: "Product not found" });
+      res.status(204).send();
+    } catch (error) {
+      console.error("Error en delete:", error);
+      res.status(500).json({ error: "Error deleting product" });
+    }
+  }
+}
+
+module.exports = new ProductController();

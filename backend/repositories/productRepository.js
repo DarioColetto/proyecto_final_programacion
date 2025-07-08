@@ -20,33 +20,6 @@ class ProductRepository {
     return Product.findByPk(id);
   }
 
-  //Find by name
-    static findByName(name) {
-        return Product.findAll({ where: { name } });
-    }
-    //Find by brand
-    static findByBrand(brand) {
-        return Product.findAll({ where: { brand } });
-    }
-    //Find by category
-    static findByCategory(category) {
-        return Product.findAll({ where: { category } });
-    }
-    //Find by price range
-    static findByPriceRange(minPrice, maxPrice) {
-        return Product.findAll({
-            where: {
-                price: {
-                    [Op.between]: [minPrice, maxPrice]
-                }
-            }
-        });
-    }
-
-    static findByStock(stock) {
-        return Product.findAll({ where: { stock } });
-    }
-
     static create(data) {
         return Product.create(data);
     }
